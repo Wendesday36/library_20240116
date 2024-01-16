@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Database\QueryException; 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {
@@ -42,5 +44,28 @@ class ReservationController extends Controller
         $reservation->message = $request->message;
         $reservation->save();
         
+    }
+    public function reservationInsertTry($book_id){
+        $user = Auth::user();
+        try { 
+            // Próbáld meg beszúrni a rekordot 
+            DB::table('reservations')->insert([ 
+                'user_id' => $user->id, 
+                'book_id' => $book_id, 
+                'start'=>date(now()),
+                'message'=>0
+                // többi oszlop és érték... 
+            ]);  
+        } 
+        catch (QueryException $e) { 
+            // Ha kivétel történik (például az egyediségi megsértése), akkor itt kezeld 
+            if ($e->errorInfo[1] == 1062) { // 1062 az egyediségi megsértés hibakódja MySQL-ben 
+                echo "A rekord már létezik a táblában.";
+        //return redirect "/"; 
+            } else { 
+                // Más típusú kivétel esetén kezelheted őket itt 
+                echo "Hiba történt: " . $e->getMessage(); 
+            } 
+        }
     }
 }

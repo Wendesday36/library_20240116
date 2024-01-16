@@ -126,7 +126,7 @@ class LendingController extends Controller
 ->update(['status' => 0]); */
         DB::select('CALL toStore(?)', array($copy_id));
     }
-    public function lending_insert_try($copy_id){
+    public function lendingInsertTry($copy_id){
         $user = Auth::user();
         try { 
             // Próbáld meg beszúrni a rekordot 
@@ -150,5 +150,38 @@ class LendingController extends Controller
             } 
         } 
         
+    }
+
+    public function lendingCount($copy_id){
+        
+            $user = Auth::user();
+            try {
+                $pontok = DB::table('lendings')
+                    ->where('user_id', $user->id)
+                    ->where('start','>',now()->subYear())
+                    ->sum('notice');
+                    echo $pontok;
+     
+                if ($pontok <= 3) {
+                    DB::table('lendings')->insert([
+                        'user_id' => $user->id,
+                        'copy_id' => $copy_id,
+                        'start' => date(now()),
+                        'extension' => 0,
+                        'notice' => 0,
+                    ]);
+                }else{
+                    echo "Túl sok figyelmeztetésed van!";
+                }
+            } catch (QueryException $e) {
+     
+                if ($e->errorInfo[1] == 1062) {
+                    echo "A rekord már létezik a táblában.";
+                } else {
+     
+                    echo "Hiba történt: " . $e->getMessage();
+                }
+            }
+         
     }
 }

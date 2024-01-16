@@ -51,6 +51,10 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('books_back', [LendingController::class, 'booksBack']);
     //triggerek
     Route::patch('bringBack/{copy_id}/{start}',[LendingController::class,'bringBack']); 
+    //try to insert lendings
+    Route::post("lendingInsertTry/{copy_id}",[LendingController::class,'lendingInsertTry']);
+    Route::post("reservationInsertTry/{book_id}",[ReservationController::class,'reservationInsertTry']);
+    Route::post("lendingCount/{copy_id}",[LendingController::class,'lendingCount']);
 });
 
 //bejelentkezés nélkül is hozzáférhet
