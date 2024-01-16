@@ -1,0 +1,69 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "library",
+    "dateExported": "2023-10-17T10:21:14.136Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "c34bc0f5-a1dd-47ab-906f-df019084f9a7",
+            "colId": "7a620ae0-13f9-4013-b9e8-62cdd390123c",
+            "containerId": "",
+            "name": "modify_book",
+            "url": "localhost:8000/api/book/5?author=Vámos Miklós&title=Tiszta tűz&pieces=20",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2023-10-03T11:30:05.408Z",
+            "modified": "2023-10-03T11:35:18.667Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "author",
+                    "value": "Vámos Miklós",
+                    "isPath": false
+                },
+                {
+                    "name": "title",
+                    "value": "Tiszta tűz",
+                    "isPath": false
+                },
+                {
+                    "name": "pieces",
+                    "value": "20",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "a09b85e5-3454-48c8-8703-f32ebf27e100",
+            "colId": "7a620ae0-13f9-4013-b9e8-62cdd390123c",
+            "containerId": "",
+            "name": "new_book",
+            "url": "localhost:8000/api/book/5?author=Vámos Miklós&title=Tiszta tűz&pieces=20",
+            "method": "PUT",
+            "sortNum": 20000,
+            "created": "2023-10-03T11:38:18.657Z",
+            "modified": "2023-10-03T11:38:18.657Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "author",
+                    "value": "Vámos Miklós",
+                    "isPath": false
+                },
+                {
+                    "name": "title",
+                    "value": "Tiszta tűz",
+                    "isPath": false
+                },
+                {
+                    "name": "pieces",
+                    "value": "20",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}
